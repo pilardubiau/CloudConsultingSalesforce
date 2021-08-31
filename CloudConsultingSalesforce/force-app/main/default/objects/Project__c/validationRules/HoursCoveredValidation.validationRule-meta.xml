@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>HoursCoveredValidation</fullName>
+    <active>true</active>
+    <errorConditionFormula>IF( Hours_Covered__c &lt;&gt;  Total_Hours__c &amp;&amp;   ISPICKVAL(Stage__c, &apos;In Progress&apos; ) || ISPICKVAL(Stage__c, &apos;Completed&apos; ), true, false)</errorConditionFormula>
+    <errorMessage>The hours have not been completed yet</errorMessage>
+</ValidationRule>

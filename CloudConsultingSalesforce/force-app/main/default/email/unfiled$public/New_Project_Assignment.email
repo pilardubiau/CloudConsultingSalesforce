@@ -1,0 +1,5 @@
+Congrats! You have been assigned to a new project: {!Project__c.Name}.
+This poject will last : {!Project__c.Date_Display__c}
+
+
+Good Luck.
