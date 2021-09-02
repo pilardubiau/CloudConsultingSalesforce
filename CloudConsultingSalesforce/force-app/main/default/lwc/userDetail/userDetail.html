@@ -1,3 +1,50 @@
 <template>
-    
+    <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered" aria-label="Example table of Opportunities with vertical borders">
+        <thead>
+        <tr class="slds-line-height_reset">
+          <th class="" scope="col">
+            <div class="slds-truncate" title="Select"></div>
+            </th>
+        <th class="" scope="col">
+        <div class="slds-truncate" title="Name">Name</div>
+        </th>
+        <th class="" scope="col">
+        <div class="slds-truncate" title="Start Date">Start Date</div>
+        </th>
+        <th class="" scope="col">
+        <div class="slds-truncate" title="End Date">End Date</div>
+        </th>
+        </tr>
+        </thead>  
+        <template for:each={user} for:item="singleUser"> 
+        <tbody key={singleUser.name}>
+        <td data-label="Name">
+        <div class="slds-truncate" >
+          <label class="slds-checkbox-button" for="example-unique-id-27">
+            <input type="checkbox" class="slds-assistive-text" value="example-unique-id-27" />
+            <span class="slds-icon_container slds-icon-utility-add slds-current-color" title="Description of icon when needed">
+            <svg class="slds-icon slds-icon_x-small" aria-hidden="true">
+            <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#add"></use>
+            </svg>
+            <span class="slds-assistive-text">Add product</span>
+            </span>
+            </label>  
+        </div>
+        </td>   
+        <td key={singleUser.name} data-label="Name">
+        <div class="slds-truncate" title="User">{singleUser.name}</div>
+        </td> 
+        <td key={singleUser.name} data-label="Start Date">
+            <div class="slds-truncate" title="Start Date">
+              <input type="text" placeholder="DD/MM/YYYY" class="slds-input" />
+            </div>       
+        </td>
+        <td key={singleUser.name} data-label="End Date">
+            <div class="slds-truncate" title="End Date">
+              <input type="text" placeholder="DD/MM/YYYY " class="slds-input" />
+            </div>    
+        </td>  
+        </tbody>
+      </template> 
+        </table>  
 </template>

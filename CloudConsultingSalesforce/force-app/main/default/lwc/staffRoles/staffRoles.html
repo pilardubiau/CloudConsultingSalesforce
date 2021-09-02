@@ -4,9 +4,7 @@
 
         <template for:each={usersByRole} for:item="user">
             <lightning-accordion-section key={user.detail.role} name={user.detail.role} label={user.detail.role}>
-                <template for:each={user.users} for:item="user1">
-                    <p key={user1.name}>{user1.name}</p>
-                </template>
+                    <c-user-detail user={user.users}></c-user-detail>    
             </lightning-accordion-section>
         </template>
 
