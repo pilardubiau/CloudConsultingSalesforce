@@ -1,9 +1,12 @@
-import { LightningElement, api } from 'lwc';
+import { LightningElement, api, wire } from 'lwc';
 
 export default class ContainerStaffAlocation extends LightningElement {
 
- @api recordId
+    // @api recordId;
 
- connectedCallback(){console.log(this.recordId)}
+    // @wire(getRoles, { projectId: '$recordId' })
+    // usersByRole;
 
+    // connectedCallback(){console.log(this.recordId)}
+    
 }
