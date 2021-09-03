@@ -8,5 +8,4 @@ export default class ContainerStaffAlocation extends LightningElement {
     // usersByRole;
 
     // connectedCallback(){console.log(this.recordId)}
-    
 }

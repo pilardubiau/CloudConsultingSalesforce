@@ -1,15 +1,11 @@
 <template>
     <p>{activeSectionsMessage}</p>
     <lightning-accordion allow-multiple-sections-open onsectiontoggle={handleSectionToggle}>
-
-        <template for:each={usersByRole} for:item="user">
-            <lightning-accordion-section key={user.detail.role} name={user.detail.role} label={user.detail.role}>
-                <template for:each={user.users} for:item="user1">
-                    <p key={user1.name}>{user1.name}</p>
-                </template>
+        <template for:each={usersByRole} for:item="role">
+            <lightning-accordion-section key={role.detail.role} name={role.detail.role} label={role.detail.role}>
+                    <c-user-list user={role.users} role={role.detail.lineItem}></c-user-list>    
             </lightning-accordion-section>
         </template>
-
     </lightning-accordion>
-    <lightning-button title="Asignar" label="Asignar"></lightning-button>
+    <lightning-button onclick={handleSave} label="Assign"></lightning-button>   
 </template>
