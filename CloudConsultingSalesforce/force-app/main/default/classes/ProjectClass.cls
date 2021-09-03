@@ -43,6 +43,7 @@ public class ProjectClass {
     }
         
     //Lista los usuarios disponibles, Cuyos project staff no coinciden con lad fechas del proyecto actual.
+    @AuraEnabled(cacheable= true)
     public static List<User> getAvailableUsers(Id projectId){ 
         Map<Id, List<Project_Staff__c>> userMap = getProjectStaffByUser(projectId);
         List<Project_Line_Item__c> staffRequirementsInProject = getRequirementsForProject(projectId);
