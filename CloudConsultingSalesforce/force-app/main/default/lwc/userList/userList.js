@@ -2,8 +2,9 @@ import { LightningElement, api } from 'lwc';
 
 
 export default class UserDetail1 extends LightningElement {
-    @api user;
-    @api role; 
+    @api recordId;
+    @api role;
+    
     usersList;
     columns = [
         { label: 'Name', fieldName: 'name'},

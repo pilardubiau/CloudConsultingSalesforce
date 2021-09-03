@@ -1,9 +1,10 @@
 <template>
     <p>{activeSectionsMessage}</p>
     <lightning-accordion allow-multiple-sections-open onsectiontoggle={handleSectionToggle}>
-        <template for:each={usersByRole} for:item="role">
-            <lightning-accordion-section key={role.detail.role} name={role.detail.role} label={role.detail.role}>
-                    <c-user-list user={role.users} role={role.detail.lineItem}></c-user-list>    
+        <template for:each={requireRoles.data} for:item="role">
+            <lightning-accordion-section key={role.id} name={role.Role__c} label={role.Role__c}>
+                    <c-user-list role={role.Role__c} record-id={recordId}></c-user-list> 
+                    <p>Users</p>
             </lightning-accordion-section>
         </template>
     </lightning-accordion>
