@@ -1,8 +1,8 @@
 public class ProjectClass {
     //Devuelve el listado de requerimientos de staff para el proyecto.
     public static List<Project_Line_Item__c> getRequirementsForProject(Id projectId){
-        List<Project_Line_Item__c> staffRequirementsInProject = [SELECT Id, Project__r.Start_Date__c, Project__r.End_Date__c, Role__c
-                                      							 FROM Project_Line_Item__c WHERE Project__c = 'a035f000001JlQwAAK'];
+        List<Project_Line_Item__c> staffRequirementsInProject = [SELECT Id, Project__r.Start_Date__c, Project__r.End_Date__c, Role__c, Quantity__c, Hours_Assigned__c
+                                      							 FROM Project_Line_Item__c WHERE Project__c =: projectId];
        
         return staffRequirementsInProject;
     }
@@ -25,7 +25,7 @@ public class ProjectClass {
     public static Map<Id, List<Project_Staff__c>> getProjectStaffByUser(Id projectId){
         List<User> usersByRoles = getUserByRol(projectId);
         
-        List<Project_Staff__c> staffList = [SELECT Id, Project_Line_Item__r.Project__r.Start_Date__c,Project_Line_Item__r.Project__r.End_Date__c, User__c   
+        List<Project_Staff__c> staffList = [SELECT Id, Start_Date__c, End_Date__c, User__c   
                                             FROM Project_Staff__c where User__c IN: usersByRoles and Project_Line_Item__r.Project__r.Stage__c != 'Completed'];
         
         Map<Id, List<Project_Staff__c>> userMap = new Map<Id, List<Project_Staff__c>>(); 
@@ -55,8 +55,8 @@ public class ProjectClass {
             Boolean available = true;
             if(userMap.get(staffId).size()>0){
                 for(Project_Staff__c PS: userMap.get(staffId)){
-                    if(!((PS.Project_Line_Item__r.Project__r.Start_Date__c < startProjectDate || PS.Project_Line_Item__r.Project__r.Start_Date__c > endProjectDate) 
-                       && (PS.Project_Line_Item__r.Project__r.End_Date__c < startProjectDate || PS.Project_Line_Item__r.Project__r.End_Date__c > endProjectDate))){
+                    if(!((PS.Start_Date__c < startProjectDate || PS.Start_Date__c > endProjectDate) 
+                       && (PS.End_Date__c < startProjectDate || PS.End_Date__c > endProjectDate))){
                            available = false;
                            break;                        
                        }
@@ -81,13 +81,16 @@ public class ProjectClass {
         return availableUsers;
     } 
     
-    
-    
-    
-    public static List<Map<Id, List<User>>> rodriCareta(Id projectId){
-        List<User> availableUsers = getAvailableUsers(projectId);        
+   	//Lista los usuarios disponibles segun el rol solicitado.
+    public static List<User> getAvailableUsersByRole(Id projectId, String role){
+        List<User> availableUsers = getAvailableUsers(projectId); 
+        List<User> availableUsersByRole = new List<User>();
         
-  
-        return new List<Map<Id, List<User>>>();
+        for(User u: availableUsers){
+            if(u.UserRole.Name == role){
+                availableUsersByRole.add(u);
+            }
+        }
+        return availableUsersByRole;
     }
 }
