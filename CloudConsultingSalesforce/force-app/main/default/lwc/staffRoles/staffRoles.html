@@ -4,7 +4,6 @@
         <template for:each={requireRoles.data} for:item="role">
             <lightning-accordion-section key={role.id} name={role.Role__c} label={role.Role__c}>
                     <c-user-list role={role.Role__c} record-id={recordId}></c-user-list> 
-                    <p>Users</p>
             </lightning-accordion-section>
         </template>
     </lightning-accordion>

@@ -33,19 +33,4 @@ export default class LightningExampleAccordionMultiple extends LightningElement 
             }
         })
     }
-
-    usersByRole= [
-        {
-            users:[{name:'Rodrigo Cadiz', id: '440'}, {name: 'Leonardo Campoy', id: '994'}],
-            detail:{role : 'Desarrollador', lineItem: '54dfb5fDEV'}
-        },
-        {
-            users: [{name: 'Pilar Dubiau'}],
-            detail: {role: 'Arquitecto', lineItem: '45asd44ARQ'}
-        },
-        {
-            users: [{name: 'Hernan Langer'}],
-            detail: {role: 'Consultor', lineItem: '4fds5s8CONS'}
-        }
-    ]
 }

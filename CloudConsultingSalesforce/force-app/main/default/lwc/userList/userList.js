@@ -1,13 +1,17 @@
-import { LightningElement, api } from 'lwc';
+import { LightningElement, api, wire } from 'lwc';
+import getAvailableUsersByRole from '@salesforce/apex/ProjectClass.getAvailableUsersByRole'
 
 
-export default class UserDetail1 extends LightningElement {
+export default class UserList extends LightningElement {
     @api recordId;
     @api role;
-    
-    usersList;
+
+    @wire(getAvailableUsersByRole, {projectId: '$recordId',role:'$role'})
+    users
+
     columns = [
-        { label: 'Name', fieldName: 'name'},
+        { label: 'First Name', fieldName: 'FirstName'},
+        { label: 'Last Name', fieldName: 'LastName'},
         { 
             label: 'Start Date', 
             fieldName: 'Start_Date__c', 
@@ -27,4 +31,5 @@ export default class UserDetail1 extends LightningElement {
         const dataUserRows= this.template.querySelector('lightning-datatable').getSelectedRows()
         return JSON.parse(JSON.stringify(dataUserRows))
     }
+
 }
