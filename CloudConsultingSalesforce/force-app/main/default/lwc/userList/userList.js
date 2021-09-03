@@ -27,5 +27,4 @@ export default class UserDetail1 extends LightningElement {
         const dataUserRows= this.template.querySelector('lightning-datatable').getSelectedRows()
         return JSON.parse(JSON.stringify(dataUserRows))
     }
-
 }
