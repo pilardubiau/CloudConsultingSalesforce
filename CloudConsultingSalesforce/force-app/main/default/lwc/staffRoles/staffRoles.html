@@ -1,11 +1,8 @@
 <template>
-    <!-- <lightning-accordion allow-multiple-sections-open onsectiontoggle={handleSectionToggle}>
-        <template for:each={requireRoles.data} for:item="role">
-            <lightning-accordion-section key={role.Id} name={role.Role__c} label={role.Role__c}>
-                    <p>Hola</p>
-            </lightning-accordion-section>
-        </template>
-    </lightning-accordion><br>
-    <lightning-button onclick={handleSave} label="Assign"></lightning-button> -->
-    <lightning-card title="HOla"></lightning-card>
+    <template for:each={requireRoles.data} for:item="role">
+        <lightning-card key={role.Id} title={role.Role__c}>
+            <p key={role.Id}>Hours to assign: {role.UnassignedHours__c} hs</p>  
+        </lightning-card>      
+    </template>
+    <c-user-list onassign={handleAssign} record-id={recordId}></c-user-list>            
 </template>
