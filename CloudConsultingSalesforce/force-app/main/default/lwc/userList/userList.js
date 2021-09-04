@@ -1,17 +1,26 @@
 import { LightningElement, api, wire } from 'lwc';
 import getAvailableUsers from '@salesforce/apex/ProjectClass.getAvailableUsers'
 import createProjectStaff from '@salesforce/apex/ProjectClass.createProjectStaff'
+import {refreshApex} from '@salesforce/apex';
+import {ShowToastEvent} from 'lightning/platformShowToastEvent'
+
+const SUCCESS_TITLE = 'Success';
+const MESSAGE_SHIP_IT     = 'Staff successfully added to your Project!';
+const SUCCESS_VARIANT     = 'success';
+
 export default class UserList extends LightningElement {
     @api recordId;
     @api lineItem;
     usersList;
-
+    getUsers;
+    
     @wire(getAvailableUsers, {projectId: '$recordId'})
-    users({data, error}){
-        if(data){
+    users(result){
+        this.getUsers = result
+        if(result.data){
             this.usersList = [];
-            for(let i=0; i<data.length; i++){
-                this.usersList.push({...data[i], Role: data[i].UserRole.Name})
+            for(let i=0; i<result.data.length; i++){
+                this.usersList.push({...result.data[i], Role: result.data[i].UserRole.Name});
             }
         }
     }
@@ -20,12 +29,19 @@ export default class UserList extends LightningElement {
         const users = event.detail.draftValues
         createProjectStaff({usersToAdd: users, projectId: this.recordId})
         .then(()=>{
-            console.log('Todo viento')
+            console.log('Todo viento');
+            this.dispatchEvent(new ShowToastEvent({
+                title: SUCCESS_TITLE,
+                message: MESSAGE_SHIP_IT,
+                variant: SUCCESS_VARIANT
+            }))
+            return refreshApex(this.getUsers);
         })
         .catch((error)=>{
-            console.log(error)
+            console.log(error);
         })
     }
+
 
 
     columns = [
