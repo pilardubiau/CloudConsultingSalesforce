@@ -7,7 +7,7 @@ export default class UserList extends LightningElement {
     @api recordId;
     @api lineItem;
     usersList;
-    
+
     @wire(getAvailableUsers, {projectId: '$recordId'})
     users({data, error}){
         if(data){
@@ -16,6 +16,11 @@ export default class UserList extends LightningElement {
                 this.usersList.push({...data[i], Role: data[i].UserRole.Name})
             }
         }
+    }
+
+    handleSave(event){
+        const users = JSON.parse(JSON.stringify(event.detail.draftValues))
+        
     }
 
 

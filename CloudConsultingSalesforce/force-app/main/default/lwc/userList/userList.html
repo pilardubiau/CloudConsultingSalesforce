@@ -4,7 +4,8 @@
             <lightning-datatable
                     key-field="Id"
                     data={usersList}
-                    columns={columns}>
+                    columns={columns}
+                    onsave={handleSave}>
             </lightning-datatable>
       </template>
     </div>
