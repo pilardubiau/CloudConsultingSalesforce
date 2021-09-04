@@ -1,11 +1,27 @@
+<!-- <template>
+          <lightning-card title="Roles" >
+                <template for:each={requireRoles.data} for:item="role">
+                        <p key={role.Id}> {role.Role__c} : {role.Quantity__c} </p>  
+                </template>            
+          </lightning-card>      
+</template> -->
 <template>
-    <!-- <lightning-accordion allow-multiple-sections-open onsectiontoggle={handleSectionToggle}>
-        <template for:each={requireRoles.data} for:item="role">
-            <lightning-accordion-section key={role.Id} name={role.Role__c} label={role.Role__c}>
-                    <p>Hola</p>
-            </lightning-accordion-section>
-        </template>
-    </lightning-accordion><br>
-    <lightning-button onclick={handleSave} label="Assign"></lightning-button> -->
-    <lightning-card title="HOla"></lightning-card>
+<div class="demo-only" style="width:30rem">
+    <article class="slds-tile">
+      <h3 class="slds-tile__title slds-truncate" title="Salesforce UX">
+        <a>Roles hours to cover </a>
+      </h3>
+      <div class="slds-tile__detail">
+        <dl class="slds-list_horizontal slds-wrap">
+            <template for:each={requireRoles.data} for:item="role">               
+                <dt class="slds-item_label slds-text-color_weak slds-truncate" key={role.Id} title="First Label"> 
+                    <p>{role.Role__c} : {role.Quantity__c}</p>
+                </dt>               
+        </template> 
+        </dl>
+      </div>
+    </article>
+  </div>
 </template>
+   
+
