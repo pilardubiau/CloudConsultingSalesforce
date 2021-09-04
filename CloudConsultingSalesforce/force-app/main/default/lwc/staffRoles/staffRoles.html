@@ -1,7 +1,8 @@
 <template>
     <template for:each={requireRoles.data} for:item="role">
         <lightning-card key={role.Id} title={role.Role__c}>
-            {role.Quantity__c}
-        </lightning-card>
+            <p key={role.Id}>Hours to assign: {role.UnassignedHours__c} hs</p>  
+        </lightning-card>      
     </template>
+    <c-user-list onassign={handleAssign} record-id={recordId}></c-user-list>            
 </template>

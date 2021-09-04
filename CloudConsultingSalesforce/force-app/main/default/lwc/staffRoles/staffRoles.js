@@ -1,11 +1,18 @@
 import { LightningElement, api, wire } from 'lwc';
 import getRequirementsForProject from '@salesforce/apex/ProjectClass.getRequirementsForProject'
+import {refreshApex} from '@salesforce/apex';
 
 export default class LightningExampleAccordionMultiple extends LightningElement {
     @api recordId;
-     
+    requireRoles;
+
     @wire
     (getRequirementsForProject, { projectId: '$recordId' })
-    requireRoles    
+    roles(result){
+        this.requireRoles = result
+    }    
 
+    handleAssign(){
+        return refreshApex(this.requireRoles);
+    }
 }

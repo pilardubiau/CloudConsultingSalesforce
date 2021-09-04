@@ -35,6 +35,7 @@ export default class UserList extends LightningElement {
                 message: MESSAGE_SHIP_IT,
                 variant: SUCCESS_VARIANT
             }))
+            this.dispatchEvent(new CustomEvent('assign'))
             return refreshApex(this.getUsers);
         })
         .catch((error)=>{
@@ -63,11 +64,4 @@ export default class UserList extends LightningElement {
             typeAttributes: {year: "numeric",month: "2-digit",day: "2-digit"} 
         },
     ];
-
-    @api selectRowsData(){
-        const dataUserRows= this.template.querySelector('lightning-datatable').getSelectedRows()
-        const usersList = JSON.parse(JSON.stringify(dataUserRows))
-        console.log(usersList)
-        return { users: usersList, lineItem: this.lineItem }
-    }
 }
