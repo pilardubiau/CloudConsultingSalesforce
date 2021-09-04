@@ -97,25 +97,33 @@ public class ProjectClass {
         return availableUsersByRole;
     }
     
-    @AuraEnabled(cacheable = true)
-    public static void createProjectStaff(List<SObject> userObject, Id projectId){
+    @AuraEnabled
+    public static void createProjectStaff(Object usersToAdd, Id projectId){
+    
+    List<Project_Staff__c> userObject = (List<Project_Staff__c>) JSON.deserialize(JSON.serialize(usersToAdd), List<Project_Staff__c>.class);
+    System.debug(userObject);    
+
       List<Project_Line_Item__c> projectLineItemList =  getRequirementsForProject(projectId);
-      List<User> users = [select id, UserRole.Name from User where Id IN: userObject];
+      Set<Id> usersId = new Set<Id>();   
       List<Project_Staff__c> newProjectStaffs = new List<Project_Staff__c>();
       Map<Id, Date> startDate = new Map<Id, Date>();
       Map<Id, Date> endDate = new Map<Id, Date>();
         
-        for(SObject so: userObject){
+        for(Project_Staff__c so: userObject){
             startDate.put((Id) so.get('id'), (Date) so.get('Start_Date__c'));
             endDate.put((Id)so.get('id'),(Date) so.get('End_Date__c'));
+            usersId.add((Id)so.Id);
         } 
         
-        
+      List<User> users = [select id, UserRole.Name from User where Id IN: usersId];
+      System.debug(users);  
         for(Project_Line_Item__c pli: projectLineItemList){
             for(User u: users){
                 if(u.UserRole.Name == pli.Role__c){
                     newProjectStaffs.add(
-                        new Project_Staff__c(User__c = u.Id,
+                        new Project_Staff__c(
+                                            Name = pli.Role__c,
+                                            User__c = u.Id,
                                             Project_Line_Item__c = pli.Id,
                                             Start_Date__c = startDate.get(u.Id),
                                             End_Date__c = endDate.get(u.Id))
@@ -123,13 +131,6 @@ public class ProjectClass {
                 }
             }
         }  
-        
-        insert newProjectStaffs;
-        
-    }
-    
-    
-    
-    
-    
+        insert newProjectStaffs;   
+    }   
 }

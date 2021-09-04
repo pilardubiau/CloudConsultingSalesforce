@@ -1,8 +1,6 @@
 import { LightningElement, api, wire } from 'lwc';
 import getAvailableUsers from '@salesforce/apex/ProjectClass.getAvailableUsers'
-
-
-
+import createProjectStaff from '@salesforce/apex/ProjectClass.createProjectStaff'
 export default class UserList extends LightningElement {
     @api recordId;
     @api lineItem;
@@ -19,8 +17,14 @@ export default class UserList extends LightningElement {
     }
 
     handleSave(event){
-        const users = JSON.parse(JSON.stringify(event.detail.draftValues))
-        
+        const users = event.detail.draftValues
+        createProjectStaff({usersToAdd: users, projectId: this.recordId})
+        .then(()=>{
+            console.log('Todo viento')
+        })
+        .catch((error)=>{
+            console.log(error)
+        })
     }
 
 
