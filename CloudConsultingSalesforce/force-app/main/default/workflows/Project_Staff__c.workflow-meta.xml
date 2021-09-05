@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Staff_assingment_notification</fullName>
+        <description>Staff assingment notification</description>
+        <protected>false</protected>
+        <recipients>
+            <field>User__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Staff_assigment_notification</template>
+    </alerts>
+    <alerts>
+        <fullName>Staff_removed_from_project_notification</fullName>
+        <description>Staff removed from project notification</description>
+        <protected>false</protected>
+        <recipients>
+            <field>User__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Staff_no_longer_assigned</template>
+    </alerts>
+</Workflow>
