@@ -1,8 +1,6 @@
 public class ProjectStaffTriggerHelper {
     public static void triggerBeforeInsert(List<Project_Staff__c> staffList){
         Map<Id, List<Project_Staff__c>> projectStaffByUser = new Map<Id, List<Project_Staff__c>>();
-        //Set<Id> projectsId = new Set<Id>();
-        //Map<Id, Project__c> projectByProject = new Map<Id, Project__c>();
         
         Set<Id> usersId = new Set<Id>(); 
         for(Project_Staff__c staff : staffList){
@@ -13,7 +11,7 @@ public class ProjectStaffTriggerHelper {
         }
         
         List<Project_Staff__c> projectStaff = [SELECT Id, Start_Date__c, End_Date__c, Project_Line_Item__r.Project__r.Start_Date__c, Project_Line_Item__r.Project__r.End_Date__c, Project_Line_Item__r.Project__c,
-                                               User__c
+                                               User__c 
                                                FROM Project_Staff__c WHERE User__c IN: usersId AND Project_Line_Item__r.Project__r.Stage__c != 'Completed'];
         
         
