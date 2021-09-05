@@ -23,6 +23,8 @@ export default class UserList extends LightningElement {
                 this.usersList.push({...result.data[i], Role: result.data[i].UserRole.Name});
             }
         }
+        
+
     }
 
     handleSave(event){
@@ -46,7 +48,10 @@ export default class UserList extends LightningElement {
 
 
     columns = [
-        { label: 'Role', fieldName: 'Role'},
+        { label: 'Role', fieldName: 'Role', cellAttributes:{  
+            class:{  
+                fieldName: 'rolesColor'
+            } }},
         { label: 'First Name', fieldName: 'FirstName'},
         { label: 'Last Name', fieldName: 'LastName'},
         { 
@@ -61,7 +66,7 @@ export default class UserList extends LightningElement {
             fieldName: 'End_Date__c', 
             editable: true, 
             type: 'date-local',
-            typeAttributes: {year: "numeric",month: "2-digit",day: "2-digit"} 
+            typeAttributes: {year: "numeric",month: "2-digit",day: "2-digit"} ,
         },
     ];
 }
