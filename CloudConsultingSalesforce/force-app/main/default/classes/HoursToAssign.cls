@@ -1,28 +1,28 @@
 public class HoursToAssign {
-    private static Integer weekDay(DateTime startDay){
+    public static Integer weekDay(DateTime startDay){
         Integer x;
         String day = startDay.format('E');
         
         switch on day{
-            when 'mon' {
+            when 'Mon' {
                 x = 1;
             }
-            when 'tue' {
+            when 'Tue' {
                 x = 2;
             }
-            when 'wed' {
+            when 'Wed' {
                 x = 3;
             }
-            when 'thu' {
+            when 'Thu' {
                 x = 4;
             }
-            when 'fri' {
+            when 'Fri' {
                 x = 5;
             }
-            when 'sat' {
+            when 'Sat' {
                 x = 6;
             }
-            when else {
+            when 'Sun' {
                 x = 7;
             }
         }
@@ -40,6 +40,7 @@ public class HoursToAssign {
         Integer totalDays = startDate.daysBetween(endDate);
         Integer i = 0;
         Integer h = 0;
+
         
         do {
             switch on day{
@@ -77,7 +78,7 @@ public class HoursToAssign {
                     i++;
                 }
             }            
-        } while(i < totalDays);
+        } while(i <= totalDays);
         
         h = h*8;
         
