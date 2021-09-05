@@ -5,8 +5,8 @@ import {refreshApex} from '@salesforce/apex';
 import {ShowToastEvent} from 'lightning/platformShowToastEvent'
 
 const SUCCESS_TITLE = 'Success';
-const MESSAGE_SHIP_IT     = 'Staff successfully added to your Project!';
-const SUCCESS_VARIANT     = 'success';
+const MESSAGE_SHIP_IT = 'Staff successfully added to your Project!';
+const SUCCESS_VARIANT = 'success';
 
 export default class UserList extends LightningElement {
     @api recordId;
@@ -43,10 +43,11 @@ export default class UserList extends LightningElement {
         })
     }
 
-
-
     columns = [
-        { label: 'Role', fieldName: 'Role'},
+        { label: 'Role', fieldName: 'Role', cellAttributes:{  
+            class:{  
+                fieldName: 'rolesColor'
+            } }},
         { label: 'First Name', fieldName: 'FirstName'},
         { label: 'Last Name', fieldName: 'LastName'},
         { 
@@ -61,7 +62,7 @@ export default class UserList extends LightningElement {
             fieldName: 'End_Date__c', 
             editable: true, 
             type: 'date-local',
-            typeAttributes: {year: "numeric",month: "2-digit",day: "2-digit"} 
+            typeAttributes: {year: "numeric",month: "2-digit",day: "2-digit"} ,
         },
     ];
 }
