@@ -1,0 +1,12 @@
+<template>
+    <div class="datatable">
+        <template if:true={usersList}>
+            <lightning-datatable
+                    key-field="Id"
+                    data={usersList}
+                    columns={columns}
+                    onsave={handleSave}>
+            </lightning-datatable>
+      </template>
+    </div>
+</template>

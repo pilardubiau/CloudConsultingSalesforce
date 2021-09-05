@@ -30,6 +30,24 @@
                 <default>false</default>
                 <label>Project Manager</label>
             </value>
+            <value>
+                <fullName>Architect</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Architect</label>
+            </value>
+            <value>
+                <fullName>Consultant</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Consultant</label>
+            </value>
+            <value>
+                <fullName>Developer</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Developer</label>
+            </value>
         </valueSetDefinition>
     </valueSet>
 </CustomField>
