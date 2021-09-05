@@ -10,4 +10,14 @@
         <senderType>CurrentUser</senderType>
         <template>unfiled$public/New_Project_Assignment</template>
     </alerts>
+    <alerts>
+        <fullName>Project_cant_start_notification</fullName>
+        <description>Project cant start notification</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Project_cant_start</template>
+    </alerts>
 </Workflow>

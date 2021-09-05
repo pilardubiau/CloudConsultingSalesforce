@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Still_project_cant_start</name>
+        <label>Still project cant start</label>
+        <locationX>397</locationX>
+        <locationY>335</locationY>
+        <actionName>Project__c.Project_cant_start_notification</actionName>
+        <actionType>emailAlert</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <apiVersion>52.0</apiVersion>
+    <decisions>
+        <name>Missing_requirements_solved</name>
+        <label>Missing requirements solved ?</label>
+        <locationX>167</locationX>
+        <locationY>336</locationY>
+        <defaultConnector>
+            <targetReference>Still_project_cant_start</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Now_ready_to_start</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Hours_Covered__c</leftValueReference>
+                <operator>GreaterThanOrEqualTo</operator>
+                <rightValue>
+                    <elementReference>$Record.Total_Hours__c</elementReference>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Squad_Lead__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Start_Date__c</leftValueReference>
+                <operator>LessThan</operator>
+                <rightValue>
+                    <elementReference>$System.OriginDateTime</elementReference>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Stage__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Pre-Kickoff</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Uddape_satage_project_to_IN_PROGRESS</targetReference>
+            </connector>
+            <label>Now ready to start</label>
+        </rules>
+    </decisions>
+    <interviewLabel>Auto In Progress project stage after start date {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Auto In Progress project stage after start date</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>FREE_FORM_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>Uddape_satage_project_to_IN_PROGRESS</name>
+        <label>Uddape satage project to IN PROGRESS</label>
+        <locationX>176</locationX>
+        <locationY>565</locationY>
+        <inputAssignments>
+            <field>Stage__c</field>
+            <value>
+                <stringValue>In Progress</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>49</locationX>
+        <locationY>51</locationY>
+        <connector>
+            <targetReference>Missing_requirements_solved</targetReference>
+        </connector>
+        <object>Project__c</object>
+        <recordTriggerType>Update</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>
