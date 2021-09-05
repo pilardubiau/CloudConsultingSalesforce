@@ -5,8 +5,8 @@ import {refreshApex} from '@salesforce/apex';
 import {ShowToastEvent} from 'lightning/platformShowToastEvent'
 
 const SUCCESS_TITLE = 'Success';
-const MESSAGE_SHIP_IT     = 'Staff successfully added to your Project!';
-const SUCCESS_VARIANT     = 'success';
+const MESSAGE_SHIP_IT = 'Staff successfully added to your Project!';
+const SUCCESS_VARIANT = 'success';
 
 export default class UserList extends LightningElement {
     @api recordId;
@@ -23,8 +23,6 @@ export default class UserList extends LightningElement {
                 this.usersList.push({...result.data[i], Role: result.data[i].UserRole.Name});
             }
         }
-        
-
     }
 
     handleSave(event){
@@ -44,8 +42,6 @@ export default class UserList extends LightningElement {
             console.log(error);
         })
     }
-
-
 
     columns = [
         { label: 'Role', fieldName: 'Role', cellAttributes:{  
