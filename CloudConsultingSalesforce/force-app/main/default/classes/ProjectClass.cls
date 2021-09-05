@@ -133,4 +133,21 @@ public class ProjectClass {
         }  
         insert newProjectStaffs;   
     }   
+    
+    @AuraEnabled
+    public static void squadLeadAssingment(Id idUser, Id idProject){
+        Project__c projectSquadLead = [select Id from project__c where Id =: idProject];
+        
+        projectSquadLead.Squad_Lead__c = idUser;
+        
+        update projectSquadLead;
+    }
+    
+    @AuraEnabled(cacheable=true)
+    public static List<Project_Staff__c> getProjectStaff(Id projectId){
+        List<Project_Staff__c> staff = [select Id, User__r.Name, Start_Date__c, End_Date__c  from Project_Staff__c where Project_Line_Item__r.Project__r.Id =: projectId];
+        
+        return staff;
+    }
+    
 }
