@@ -16,6 +16,8 @@ export default class UserList extends LightningElement {
     @api endDate;
     usersList;
     getUsers;
+    usersSelectedId;
+    isLoading = false
     
     @wire(getAvailableUsers, {projectId: '$recordId'})
     users(result){
@@ -28,23 +30,34 @@ export default class UserList extends LightningElement {
         }
     }
 
-    /*@wire(HoursToAssign, {startDate: '$startDate', endDate: '$endDate'})
-    hoursToAssign(data, error){
-        if(data){
-            console.log(data)
-        }
-    }*/
+    draftUsersFilter(usersDraft){
+        const usersToAdd = usersDraft.filter((u)=> this.usersSelectedId.includes(u.Id))
+        return usersToAdd;
+    }
+
+    handleSelected(event){
+        const usersSelected = JSON.parse(JSON.stringify(event.detail.selectedRows));
+        const draftId = []
+        usersSelected.forEach(user => {
+            console.log(user)
+            draftId.push(user.Id)
+        });
+        this.usersSelectedId = draftId;
+    }
 
     handleSave(event){
-        const users = event.detail.draftValues
+        this.isLoading = true;
+        const u = JSON.parse(JSON.stringify(event.detail.draftValues))
+        const users = this.draftUsersFilter(u)
+        console.log(users)
         createProjectStaff({usersToAdd: users, projectId: this.recordId})
         .then(()=>{
-            console.log('Todo viento');
             this.dispatchEvent(new ShowToastEvent({
                 title: SUCCESS_TITLE,
                 message: MESSAGE_SHIP_IT,
                 variant: SUCCESS_VARIANT
             }))
+
             this.dispatchEvent(new CustomEvent('assign'))
             return refreshApex(this.getUsers);
         })
@@ -52,6 +65,7 @@ export default class UserList extends LightningElement {
             console.log(error);
         })
         .finally(()=>{
+            this.isLoading = false;
             this.template.querySelector("lightning-datatable").draftValues = []; 
         })
     }
@@ -80,4 +94,11 @@ export default class UserList extends LightningElement {
         },*/
 
     ];
+
+    /*@wire(HoursToAssign, {startDate: '$startDate', endDate: '$endDate'})
+    hoursToAssign(data, error){
+        if(data){
+            console.log(data)
+        }
+    }*/
 }

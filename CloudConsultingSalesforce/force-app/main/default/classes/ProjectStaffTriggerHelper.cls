@@ -36,12 +36,11 @@ public class ProjectStaffTriggerHelper {
                 if(checker){
                      sl.Amount_of_Hours__c = HoursToAssign.totalHours(sl.Start_Date__c, sl.End_Date__c);
                      projectStaffByUser.get(sl.User__c).add(sl);
-                    
                 }
             }
             else{
                 sl.Amount_of_Hours__c = HoursToAssign.totalHours(sl.Start_Date__c, sl.End_Date__c);
-                     projectStaffByUser.get(sl.User__c).add(sl);
+                projectStaffByUser.get(sl.User__c).add(sl);
             }
         }
     }

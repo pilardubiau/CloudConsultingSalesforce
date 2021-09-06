@@ -1,5 +1,6 @@
 <template>
     <div class="datatable">
+        <lightning-spinner if:true={isLoading}></lightning-spinner>  
         <template if:true={usersList}>
             <lightning-datatable
                     key-field="Id"
@@ -8,7 +9,8 @@
                     sorted-by={sortBy}
                     sorted-direction={sortDirection}
                     onsort={doSorting}
-                    onsave={handleSave}>
+                    onsave={handleSave}
+                    onrowselection={handleSelected}>
             </lightning-datatable>
       </template>
     </div>
