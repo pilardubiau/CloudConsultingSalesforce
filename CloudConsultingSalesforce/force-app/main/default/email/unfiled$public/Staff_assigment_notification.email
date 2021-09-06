@@ -1,0 +1,1 @@
+Hello {!Project_Staff__c.User__c}, you have been assigned to work at a new project, starting on {!Project_Staff__c.Start_Date__c} till {!Project_Staff__c.End_Date__c}.

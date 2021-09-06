@@ -11,24 +11,24 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>Consultor</fullName>
-                <default>false</default>
-                <label>Consultor</label>
-            </value>
-            <value>
-                <fullName>Desarrollador</fullName>
-                <default>false</default>
-                <label>Desarrollador</label>
-            </value>
-            <value>
-                <fullName>Arquitecto</fullName>
-                <default>false</default>
-                <label>Arquitecto</label>
-            </value>
-            <value>
                 <fullName>Project Manager</fullName>
                 <default>false</default>
                 <label>Project Manager</label>
+            </value>
+            <value>
+                <fullName>Consultant</fullName>
+                <default>false</default>
+                <label>Consultant</label>
+            </value>
+            <value>
+                <fullName>Developer</fullName>
+                <default>false</default>
+                <label>Developer</label>
+            </value>
+            <value>
+                <fullName>Architect</fullName>
+                <default>false</default>
+                <label>Architect</label>
             </value>
         </valueSetDefinition>
     </valueSet>

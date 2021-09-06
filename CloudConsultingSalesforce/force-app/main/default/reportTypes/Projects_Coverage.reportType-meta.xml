@@ -210,6 +210,11 @@
             <field>Hours_Covered__c</field>
             <table>Project__c.Project_Line_Items__r.Projects_Staff__r</table>
         </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Amount_of_Hours__c</field>
+            <table>Project__c.Project_Line_Items__r.Projects_Staff__r</table>
+        </columns>
         <masterLabel>Projects Staff</masterLabel>
     </sections>
 </ReportType>

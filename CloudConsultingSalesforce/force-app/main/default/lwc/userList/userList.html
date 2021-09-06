@@ -1,0 +1,15 @@
+<template>
+    <div class="datatable">
+        <template if:true={usersList}>
+            <lightning-datatable
+                    key-field="Id"
+                    data={usersList}
+                    columns={columns}
+                    sorted-by={sortBy}
+                    sorted-direction={sortDirection}
+                    onsort={doSorting}
+                    onsave={handleSave}>
+            </lightning-datatable>
+      </template>
+    </div>
+</template>

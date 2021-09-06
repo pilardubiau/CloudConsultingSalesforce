@@ -3,7 +3,7 @@
     <fullName>Hours_Assigned__c</fullName>
     <externalId>false</externalId>
     <label>Hours Assigned</label>
-    <summarizedField>Project_Staff__c.Hours_Covered__c</summarizedField>
+    <summarizedField>Project_Staff__c.Amount_of_Hours__c</summarizedField>
     <summaryForeignKey>Project_Staff__c.Project_Line_Item__c</summaryForeignKey>
     <summaryOperation>sum</summaryOperation>
     <trackTrending>false</trackTrending>

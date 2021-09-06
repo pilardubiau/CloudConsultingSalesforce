@@ -1,0 +1,60 @@
+<template>
+<article class="slds-card">
+    <div class="slds-card__header slds-grid">
+    <header class="slds-media slds-media_center slds-has-flexi-truncate">
+    <div class="slds-media__figure">
+    <span class="slds-icon_container slds-icon-standard-contact" title="contact">
+    <svg class="slds-icon slds-icon_small" aria-hidden="true">
+    <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#contact"></use>
+    </svg>
+    <span class="slds-assistive-text"></span>
+    </span>
+    </div>
+    <div class="slds-media__body">
+    <h2 class="slds-card__header-title">
+    <a href="#" class="slds-card__header-link slds-truncate">
+    <h2>Hours to be assigned</h2>
+    </a>
+    </h2>
+    </div>
+    <div class="slds-no-flex">
+    </div>
+    </header>
+    </div>
+    <div class="slds-media__body">
+    <div class="slds-grid slds-grid_align-spread slds-has-flexi-truncate">
+    <h3 class="slds-tile__title slds-truncate" >
+        <template for:each={requireRoles.data} for:item="role">
+            <lightning-card key={role.Id}>
+                <h1 key={role.Id}>{role.Role__c} : {role.UnassignedHours__c} hs</h1>                            
+                <lightning-progress-bar value={role.UnassignedHoursPer__c} size="large"></lightning-progress-bar>      
+            </lightning-card>      
+        </template>    
+    </h3>
+    </div>
+    </div>   
+</article>
+<br>
+<div class="slds-card__header slds-grid">
+    <header class="slds-media slds-media_center slds-has-flexi-truncate">
+    <div class="slds-media__figure">
+    <span class="slds-icon_container slds-icon-standard-contact" title="contact">
+    <svg class="slds-icon slds-icon_small" aria-hidden="true">
+    <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#contact"></use>
+    </svg>
+    <span class="slds-assistive-text"></span>
+    </span>
+    </div>
+    <div class="slds-media__body">
+    <h2 class="slds-card__header-title">
+    <a href="#" class="slds-card__header-link slds-truncate">
+    <h2>Staff</h2>
+    </a>
+    </h2>
+    </div>
+    <div class="slds-no-flex">
+    </div>
+    </header>
+    </div>
+<c-user-list onassign={handleAssign} record-id={recordId}></c-user-list> 
+</template>

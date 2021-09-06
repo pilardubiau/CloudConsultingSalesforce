@@ -4,8 +4,8 @@
         <description>Al cierre de la oportunidad se le notifica al PM el proyecto al cual fue asignado.</description>
         <name>Email_notification_new_project_to_PM</name>
         <label>Email notification new project to PM</label>
-        <locationX>833</locationX>
-        <locationY>599</locationY>
+        <locationX>484</locationX>
+        <locationY>779</locationY>
         <actionName>Project__c.New_project_notification_to_PM</actionName>
         <actionType>emailAlert</actionType>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
@@ -20,8 +20,8 @@
     <assignments>
         <name>Add_PLI_to_Collection</name>
         <label>Add PLI to Collection</label>
-        <locationX>825</locationX>
-        <locationY>450</locationY>
+        <locationX>63</locationX>
+        <locationY>694</locationY>
         <assignmentItems>
             <assignToReference>New_PLI_Collection</assignToReference>
             <operator>Add</operator>
@@ -36,8 +36,8 @@
     <assignments>
         <name>Create_ProjectLineItem</name>
         <label>Create ProjectLineItem</label>
-        <locationX>825</locationX>
-        <locationY>253</locationY>
+        <locationX>208</locationX>
+        <locationY>777</locationY>
         <assignmentItems>
             <assignToReference>new_pli.Role__c</assignToReference>
             <operator>Assign</operator>
@@ -75,8 +75,8 @@
     <loops>
         <name>Loop_OpportunityLineItem</name>
         <label>Loop OpportunityLineItem</label>
-        <locationX>660</locationX>
-        <locationY>367</locationY>
+        <locationX>210</locationX>
+        <locationY>626</locationY>
         <collectionReference>Get_OpportunityLineItems_Opportunity</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -108,8 +108,8 @@
     <recordCreates>
         <name>Create_New_Project</name>
         <label>Create New Project</label>
-        <locationX>478</locationX>
-        <locationY>170</locationY>
+        <locationX>214</locationX>
+        <locationY>348</locationY>
         <connector>
             <targetReference>Get_OpportunityLineItems_Opportunity</targetReference>
         </connector>
@@ -173,8 +173,8 @@
     <recordCreates>
         <name>PLI_Creator</name>
         <label>PLI Creator</label>
-        <locationX>661</locationX>
-        <locationY>599</locationY>
+        <locationX>485</locationX>
+        <locationY>626</locationY>
         <connector>
             <targetReference>Email_notification_new_project_to_PM</targetReference>
         </connector>
@@ -183,8 +183,8 @@
     <recordLookups>
         <name>Get_OpportunityLineItems_Opportunity</name>
         <label>Get OpportunityLineItems Opportunity</label>
-        <locationX>478</locationX>
-        <locationY>367</locationY>
+        <locationX>215</locationX>
+        <locationY>476</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Loop_OpportunityLineItem</targetReference>
@@ -202,8 +202,8 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <start>
-        <locationX>86</locationX>
-        <locationY>57</locationY>
+        <locationX>88</locationX>
+        <locationY>44</locationY>
         <connector>
             <targetReference>Create_New_Project</targetReference>
         </connector>

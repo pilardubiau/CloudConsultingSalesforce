@@ -1,0 +1,1 @@
+Hello {!Project__c.Project_Manager__c}, please check the project {!Project__c.Name__c}. Starting date has come but requirements are no fulfilled yet.
