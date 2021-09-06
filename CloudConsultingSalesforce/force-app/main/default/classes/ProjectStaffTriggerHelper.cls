@@ -1,4 +1,5 @@
 public class ProjectStaffTriggerHelper {
+    
     public static void triggerBeforeInsert(List<Project_Staff__c> staffList){
         Map<Id, List<Project_Staff__c>> projectStaffByUser = new Map<Id, List<Project_Staff__c>>();
         //Set<Id> projectsId = new Set<Id>();
@@ -27,15 +28,21 @@ public class ProjectStaffTriggerHelper {
         
         
         for(Project_Staff__c sl: staffList){
+            boolean checker = true;
             if(projectStaffByUser.get(sl.User__c).size() > 0){
                 for(Project_Staff__c PS: projectStaffByUser.get(sl.User__c)){
                     if(!((PS.Start_Date__c < sl.Start_Date__c || PS.Start_Date__c > sl.End_Date__c) 
                         && (PS.End_Date__c < sl.Start_Date__c || PS.End_Date__c > sl.End_Date__c))){
                         sl.addError('FATAL ERROR loquito de mierda');
+                   		checker = false;     
                         break;
-                        }
-                }                    
+                    }
+                }
+                if(checker){
+                     sl.Amount_of_Hours__c = HoursToAssign.totalHours(sl.Start_Date__c, sl.End_Date__c);
+                }
             }
         }
     }
+    
 }
