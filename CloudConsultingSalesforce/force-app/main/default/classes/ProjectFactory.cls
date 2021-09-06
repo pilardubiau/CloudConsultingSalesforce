@@ -64,34 +64,28 @@ public class ProjectFactory {
         
         List<Project_Staff__c> projectStaffToInsert = new List<Project_Staff__c>(); 
         
-        Project_Staff__c newCoincidentProjectStaff = new Project_Staff__c(Project_Line_Item__c = projectLineItemList[0].Id,
+        Project_Staff__c newCoincidentProjectStaff = new Project_Staff__c(Name = 'Test Staff Lucas',Project_Line_Item__c = projectLineItemList[0].Id,
                                                                          User__c = [SELECT Id FROM User WHERE Name = 'Lucas Dev' LIMIT 1].Id,
                                                                          Start_Date__c = day.addDays(5), 
                                                                          End_Date__c = day.addDays(123));
         projectStaffToInsert.add(newCoincidentProjectStaff);
         
 
-        Project_Staff__c newNonCoincidentProjectStaff = new Project_Staff__c(Project_Line_Item__c = projectLineItemList[0].Id,
+        Project_Staff__c newNonCoincidentProjectStaff = new Project_Staff__c(Name = 'Test Staff Luca',Project_Line_Item__c = projectLineItemList[0].Id,
                                                                          User__c = [SELECT Id FROM User WHERE Name = 'Lucas Dev' LIMIT 1].Id,
                                                                          Start_Date__c = day.addDays(134), 
                                                                          End_Date__c = day.addDays(187));
         projectStaffToInsert.add(newNonCoincidentProjectStaff);
         
-        Project_Staff__c guadaDev = new Project_Staff__c(Project_Line_Item__c = projectLineItemList[0].Id,
-                                                                         User__c = [SELECT Id FROM User WHERE Name = 'Guadalupe Dev' LIMIT 1].Id,
+        Project_Staff__c guadaDev = new Project_Staff__c(Name = 'Test Staff Guada',
+                                                         Project_Line_Item__c = projectLineItemList[0].Id,
+                                                                        User__c = [SELECT Id FROM User WHERE Name = 'Guadalupe Dev' LIMIT 1].Id,
                                                                          Start_Date__c = day.addDays(134), 
                                                                          End_Date__c = day.addDays(187));
         
         projectStaffToInsert.add(guadaDev);
         
-        Insert projectStaffToInsert;           
+        insert projectStaffToInsert;           
         
-    }
-        
-        
-        
-        
-        
-        
-        
+    }               
 }
