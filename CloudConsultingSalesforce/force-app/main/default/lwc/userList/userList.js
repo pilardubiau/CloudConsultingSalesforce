@@ -1,6 +1,7 @@
 import { LightningElement, api, wire } from 'lwc';
 import getAvailableUsers from '@salesforce/apex/ProjectClass.getAvailableUsers'
 import createProjectStaff from '@salesforce/apex/ProjectClass.createProjectStaff'
+import HoursToAssign from '@salesforce/apex/HoursToAssign.totalHours'
 import {refreshApex} from '@salesforce/apex';
 import {ShowToastEvent} from 'lightning/platformShowToastEvent'
 
@@ -11,6 +12,8 @@ const SUCCESS_VARIANT = 'success';
 export default class UserList extends LightningElement {
     @api recordId;
     @api lineItem;
+    @api startDate;
+    @api endDate;
     usersList;
     getUsers;
     
@@ -24,6 +27,13 @@ export default class UserList extends LightningElement {
             }
         }
     }
+
+    /*@wire(HoursToAssign, {startDate: '$startDate', endDate: '$endDate'})
+    hoursToAssign(data, error){
+        if(data){
+            console.log(data)
+        }
+    }*/
 
     handleSave(event){
         const users = event.detail.draftValues
@@ -43,11 +53,9 @@ export default class UserList extends LightningElement {
         })
     }
 
+
     columns = [
-        { label: 'Role', fieldName: 'Role', cellAttributes:{  
-            class:{  
-                fieldName: 'rolesColor'
-            } }},
+        { label: 'Role', fieldName: 'Role', sorteable: true},
         { label: 'First Name', fieldName: 'FirstName'},
         { label: 'Last Name', fieldName: 'LastName'},
         { 
@@ -64,5 +72,10 @@ export default class UserList extends LightningElement {
             type: 'date-local',
             typeAttributes: {year: "numeric",month: "2-digit",day: "2-digit"} ,
         },
+        /*{ 
+            label: 'Assigned Hours', 
+            fieldName: 'Hours_Assigned__c', 
+        },*/
+
     ];
 }
