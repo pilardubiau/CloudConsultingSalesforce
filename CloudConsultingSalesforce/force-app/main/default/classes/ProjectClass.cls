@@ -17,8 +17,7 @@ public class ProjectClass {
             rolesList.add(p.Role__c);
         }
           
-   		List<User> usersByRoles = [select Id, FirstName, LastName, UserRole.Name from User where UserRole.Name in: rolesList];  
-     	
+   		List<User> usersByRoles = [select Id, FirstName, LastName, UserRole.Name from User where UserRole.Name in: rolesList];  	
         return usersByRoles;
     }
         
@@ -37,8 +36,7 @@ public class ProjectClass {
         }              
         for(Project_Staff__c staff: staffList){
             userMap.get(staff.user__c).add(staff);
-        }
-        
+              
         return userMap;
     }
         
@@ -138,8 +136,7 @@ public class ProjectClass {
     public static void squadLeadAssingment(Id idUser, Id idProject){
         Project__c projectSquadLead = [select Id from project__c where Id =: idProject];
         
-        projectSquadLead.Squad_Lead__c = idUser;
-        
+        projectSquadLead.Squad_Lead__c = idUser;   
         update projectSquadLead;
     }
     

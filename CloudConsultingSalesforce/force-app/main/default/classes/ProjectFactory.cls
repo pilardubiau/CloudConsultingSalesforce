@@ -50,8 +50,7 @@ public class ProjectFactory {
         
         insert newOppLineItem;
     }
-   
-    
+      
     public static void projectStaffCreator(){
         Date day = Date.today();
         List<Opportunity> oppList = [SELECT Id, Project_Manager__c FROM Opportunity];
