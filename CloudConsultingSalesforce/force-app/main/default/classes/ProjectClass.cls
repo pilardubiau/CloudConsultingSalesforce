@@ -2,7 +2,7 @@ public class ProjectClass {
     //Devuelve el listado de requerimientos de staff para el proyecto.
     @AuraEnabled(cacheable=true)
     public static List<Project_Line_Item__c> getRequirementsForProject(Id projectId){
-        List<Project_Line_Item__c> staffRequirementsInProject = [SELECT Id, Project__r.Start_Date__c, Project__r.End_Date__c, Role__c, Quantity__c, Hours_Assigned__c, UnassignedHours__c, UnassignedHoursPer__c
+        List<Project_Line_Item__c> staffRequirementsInProject = [SELECT Id, Project__r.Start_Date__c, Project__r.End_Date__c, Role__c, Quantity__c, Hours_Assigned__c
                                       							 FROM Project_Line_Item__c WHERE Project__c =: projectId];
        
         return staffRequirementsInProject;
