@@ -29,7 +29,7 @@ public class ProjectStaffTriggerHelper {
                     if(!((PS.Start_Date__c < sl.Start_Date__c || PS.Start_Date__c > sl.End_Date__c) 
                         && (PS.End_Date__c < sl.Start_Date__c || PS.End_Date__c > sl.End_Date__c))){
                         sl.addError('FATAL ERROR loquito de mierda');
-                   		checker = false;     
+                           checker = false;     
                         break;
                     }
                 }
@@ -37,6 +37,10 @@ public class ProjectStaffTriggerHelper {
                      sl.Amount_of_Hours__c = HoursToAssign.totalHours(sl.Start_Date__c, sl.End_Date__c);
                      projectStaffByUser.get(sl.User__c).add(sl);
                 }
+            }
+            else{
+                sl.Amount_of_Hours__c = HoursToAssign.totalHours(sl.Start_Date__c, sl.End_Date__c);
+                projectStaffByUser.get(sl.User__c).add(sl);
             }
         }
     }
