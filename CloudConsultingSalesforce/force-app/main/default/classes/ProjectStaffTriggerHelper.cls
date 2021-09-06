@@ -15,15 +15,12 @@ public class ProjectStaffTriggerHelper {
                                                User__c 
                                                FROM Project_Staff__c WHERE User__c IN: usersId AND Project_Line_Item__r.Project__r.Stage__c != 'Completed'];
         
-        
-        
-        
+
         for(Project_Staff__c ps: projectStaff){
             if(projectStaffByUser.containsKey(ps.User__c)){
                 projectStaffByUser.get(ps.User__c).add(ps);
             }
         }
-        
         
         for(Project_Staff__c sl: staffList){
             boolean checker = true;
@@ -38,9 +35,9 @@ public class ProjectStaffTriggerHelper {
                 }
                 if(checker){
                      sl.Amount_of_Hours__c = HoursToAssign.totalHours(sl.Start_Date__c, sl.End_Date__c);
+                     projectStaffByUser.get(sl.User__c).add(sl);
                 }
             }
         }
     }
-    
 }
