@@ -51,8 +51,10 @@ export default class UserList extends LightningElement {
         .catch((error)=>{
             console.log(error);
         })
+        .finally(()=>{
+            this.template.querySelector("lightning-datatable").draftValues = []; 
+        })
     }
-
 
     columns = [
         { label: 'Role', fieldName: 'Role', sorteable: true},
