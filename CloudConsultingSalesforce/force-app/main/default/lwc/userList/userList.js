@@ -7,6 +7,8 @@ import {ShowToastEvent} from 'lightning/platformShowToastEvent'
 const SUCCESS_TITLE = 'Success';
 const MESSAGE_SHIP_IT = 'Staff successfully added to your Project!';
 const SUCCESS_VARIANT = 'success';
+const ERROR_TILE = 'Error'
+const ERROR_VARIANT = 'error'
 
 export default class UserList extends LightningElement {
     @api recordId;
@@ -63,7 +65,11 @@ export default class UserList extends LightningElement {
             return refreshApex(this.getUsers);
         })
         .catch((error)=>{
-            console.log(error);
+            this.dispatchEvent(new ShowToastEvent({
+                title: ERROR_TILE,
+                message: error.body.pageErrors[0].message,
+                variant: ERROR_VARIANT
+            }))
         })
         .finally(()=>{
             this.isLoading = false;
