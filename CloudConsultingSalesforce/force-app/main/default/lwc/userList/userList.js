@@ -1,7 +1,6 @@
 import { LightningElement, api, wire } from 'lwc';
 import getAvailableUsers from '@salesforce/apex/ProjectClass.getAvailableUsers'
 import createProjectStaff from '@salesforce/apex/ProjectClass.createProjectStaff'
-import HoursToAssign from '@salesforce/apex/HoursToAssign.totalHours'
 import {refreshApex} from '@salesforce/apex';
 import {ShowToastEvent} from 'lightning/platformShowToastEvent'
 
@@ -19,6 +18,7 @@ export default class UserList extends LightningElement {
     usersSelectedId;
     isLoading = false
     
+    //Llama a un metodo apex y trae los usuarios disponibles
     @wire(getAvailableUsers, {projectId: '$recordId'})
     users(result){
         this.getUsers = result
@@ -30,26 +30,27 @@ export default class UserList extends LightningElement {
         }
     }
 
+    //Filtra la filas seleccionadas y editadas
     draftUsersFilter(usersDraft){
         const usersToAdd = usersDraft.filter((u)=> this.usersSelectedId.includes(u.Id))
         return usersToAdd;
     }
 
+    //Genera un array de los Id de usuarios de las filas seleccionadas
     handleSelected(event){
         const usersSelected = JSON.parse(JSON.stringify(event.detail.selectedRows));
         const draftId = []
         usersSelected.forEach(user => {
-            console.log(user)
             draftId.push(user.Id)
         });
         this.usersSelectedId = draftId;
     }
 
+    //Envia una lista de los usuarios para alocar al proyecto
     handleSave(event){
         this.isLoading = true;
         const u = JSON.parse(JSON.stringify(event.detail.draftValues))
         const users = this.draftUsersFilter(u)
-        console.log(users)
         createProjectStaff({usersToAdd: users, projectId: this.recordId})
         .then(()=>{
             this.dispatchEvent(new ShowToastEvent({
@@ -70,6 +71,7 @@ export default class UserList extends LightningElement {
         })
     }
 
+    //Informacion para la datatable
     columns = [
         { label: 'Role', fieldName: 'Role', sorteable: true},
         { label: 'First Name', fieldName: 'FirstName'},
@@ -88,17 +90,6 @@ export default class UserList extends LightningElement {
             type: 'date-local',
             typeAttributes: {year: "numeric",month: "2-digit",day: "2-digit"} ,
         },
-        /*{ 
-            label: 'Assigned Hours', 
-            fieldName: 'Hours_Assigned__c', 
-        },*/
-
+  
     ];
-
-    /*@wire(HoursToAssign, {startDate: '$startDate', endDate: '$endDate'})
-    hoursToAssign(data, error){
-        if(data){
-            console.log(data)
-        }
-    }*/
 }

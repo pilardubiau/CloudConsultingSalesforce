@@ -1,5 +1,7 @@
 public class ProjectStaffTriggerHelper {
-    
+
+    //Verifica que al agregar un usuario a un proyecto, este no este asignado a otro en la misma fecha
+
     public static void triggerBeforeInsert(List<Project_Staff__c> staffList){
         Map<Id, List<Project_Staff__c>> projectStaffByUser = new Map<Id, List<Project_Staff__c>>();
         
@@ -28,7 +30,7 @@ public class ProjectStaffTriggerHelper {
                 for(Project_Staff__c PS: projectStaffByUser.get(sl.User__c)){
                     if(!((PS.Start_Date__c < sl.Start_Date__c || PS.Start_Date__c > sl.End_Date__c) 
                         && (PS.End_Date__c < sl.Start_Date__c || PS.End_Date__c > sl.End_Date__c))){
-                        sl.addError('FATAL ERROR loquito de mierda');
+                        sl.addError('User not available');
                            checker = false;     
                         break;
                     }
