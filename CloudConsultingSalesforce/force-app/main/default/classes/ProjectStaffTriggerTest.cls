@@ -18,7 +18,7 @@ public class ProjectStaffTriggerTest {
         try{
         	insert newPS;    
         }catch(DmlException e){
-            System.assert(e.getMessage().contains('FATAL ERROR loquito de mierda'));
+            System.assert(e.getMessage().contains('User not available'));
         }
     }
     
